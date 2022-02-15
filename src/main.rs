@@ -141,12 +141,9 @@ fn main() -> ! {
         // We don't really care about any error results
         if let Ok(is_calibrated) = imu.is_fully_calibrated() {
             if is_calibrated {
-                match imu.calibration_profile(&mut delay) {
-                    Ok(calib_profile) => {
-                        let _ = imu.set_calibration_profile(calib_profile, &mut delay);
-                    }
-                    _ => {}
-                };
+                if let Ok(calib_profile) = imu.calibration_profile(&mut delay) {
+                    let _ = imu.set_calibration_profile(calib_profile, &mut delay);
+                }
             }
         }
     }
