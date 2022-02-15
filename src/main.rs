@@ -109,14 +109,6 @@ fn main() -> ! {
     imu.set_mode(BNO055OperationMode::NDOF, &mut delay)
         .expect("An error occurred while setting to NDOF mode");
 
-    // Uncomment the below iff you can consistently and successfully
-    // calibrate the BNO chip. At the time of this writing I cannot so I'll
-    // deal with its not being calibrated all the time
-    // while !imu.is_fully_calibrated().unwrap() {
-    //     // delay.delay_ms(500);
-    // }
-    // let calib = imu.calibration_profile(&mut delay).unwrap();
-    // imu.set_calibration_profile(calib, &mut delay).unwrap();
     blink_onboard(&mut onboard_led_pin, &mut delay, 100);
     loop {
         // Only do an meaningful tick iff
@@ -143,6 +135,18 @@ fn main() -> ! {
                 Err(_) => {
                     blink_onboard(&mut onboard_led_pin, &mut delay, 100);
                 }
+            }
+        }
+        // Check if the board is calibrated and save the profile
+        // We don't really care about any error results
+        if let Ok(is_calibrated) = imu.is_fully_calibrated() {
+            if is_calibrated {
+                match imu.calibration_profile(&mut delay) {
+                    Ok(calib_profile) => {
+                        let _ = imu.set_calibration_profile(calib_profile, &mut delay);
+                    }
+                    _ => {}
+                };
             }
         }
     }
