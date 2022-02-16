@@ -59,7 +59,7 @@ checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
 [[package]]
 name = "bno055"
 version = "0.3.3"
-source = "git+https://github.com/eupn/bno055.git#2f560639640695cfc3b4fc6f981c83375547f24e"
+source = "git+https://github.com/eupn/bno055.git?rev=2f560639640695cfc3b4fc6f981c83375547f24e#2f560639640695cfc3b4fc6f981c83375547f24e"
 dependencies = [
  "bitflags",
  "byteorder",
