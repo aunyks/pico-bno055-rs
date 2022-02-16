@@ -92,7 +92,7 @@ fn main() -> ! {
     let sda_pin = pins.gpio2.into_mode::<hal::gpio::FunctionI2C>();
     let scl_pin = pins.gpio3.into_mode::<hal::gpio::FunctionI2C>();
     // Set the pins up to have an I2C bus
-    let i2c = hal::I2C::i2c1(
+    let mut i2c = hal::I2C::i2c1(
         pac.I2C1,
         sda_pin,
         scl_pin,
@@ -102,9 +102,12 @@ fn main() -> ! {
     );
     let mut onboard_led_pin = pins.led.into_push_pull_output();
 
-    let mut imu = Bno055::new(i2c).with_alternative_address();
+    let mut imu = Bno055::new(&mut i2c).with_alternative_address();
     // Let the BNO chip warm up
     delay.delay_ms(500);
+    // Initialize it
+    imu.init(&mut delay)
+        .expect("An error occurred while initializing the BNO");
     // Now let's configure it a bit
     imu.set_mode(BNO055OperationMode::NDOF, &mut delay)
         .expect("An error occurred while setting to NDOF mode");
@@ -129,7 +132,7 @@ fn main() -> ! {
                         z[0], z[1], z[2], z[3],
                     ];
                     // Let's be optimistic about a failure in this tick
-                    // and hope (lol) that it works on the next tick
+                    // and hope that it works on the next tick
                     let _ = serial.write(&quat_bytes);
                 }
                 Err(_) => {
@@ -137,7 +140,10 @@ fn main() -> ! {
                 }
             }
         }
-        // Check if the board is calibrated and save the profile
+        // Always check if the BNO is calibrated and save the profile if so.
+        // Constant self-calibration makes it feel "smart" and reduces the need
+        // for a human to intentionally calibrate. The board should just get more accurate over
+        // time as it approaches full calibration
         // We don't really care about any error results
         if let Ok(is_calibrated) = imu.is_fully_calibrated() {
             if is_calibrated {

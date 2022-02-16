@@ -12,4 +12,4 @@ embedded-hal = "0.2.5"
 panic-halt= "0.2.0"
 usb-device= "0.2.8"
 usbd-serial = "0.1.1"
-bno055 = { git = "https://github.com/eupn/bno055.git", rev = "2f560639640695cfc3b4fc6f981c83375547f24e" }
+bno055 = { git = "https://github.com/aunyks/bno055.git", rev = "b599b8bc173256258c7a221a6c8ded518c37b333" }
