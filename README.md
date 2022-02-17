@@ -4,7 +4,7 @@ Have a [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pic
 
 ## Get Started
 
-0. [Install the latest version of Rust](https://www.rust-lang.org/tools/install). This is the language in which this program is written
+0. [Install the latest version of Rust](https://www.rust-lang.org/tools/install). This is the language in which this program is written.
 
 1. Install the `thumbv6m-none-eabi` target. This lets us compile our Rust program into a language understood by the Pico
 
