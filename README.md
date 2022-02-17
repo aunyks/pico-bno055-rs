@@ -2,12 +2,15 @@
 
 Have a [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/) get its realtime orientation data from a Bosch BNO055 [Inertial Measurement Unit](https://en.wikipedia.org/wiki/Inertial_measurement_unit) and write the to the host computer via serial USB connection.
 
+![Demo Video](https://raw.githubusercontent.com/aunyks/pico-bno055-rs/master/assets/pico-bno055-rs-demo.mp4)
+
 ## Get Started
 
-1. Install the latest version of Rust and the `thumbv6m-none-eabi` target. This is the primary language we use to write programs for the Pico
+0. [Install the latest version of Rust](https://www.rust-lang.org/tools/install). This is the language in which this program is written
+
+1. Install the `thumbv6m-none-eabi` target. This lets us compile our Rust program into a language understood by the Pico
 
 ```
-https://www.rust-lang.org/tools/install
 rustup self update
 rustup update stable
 rustup target add thumbv6m-none-eabi
@@ -31,7 +34,7 @@ rustup component add clippy
 cargo install just
 ```
 
-5. Build the project to make sure everything's setup
+5. Build the project to make sure everything's setup correctly
 
 ```
 just build
@@ -61,4 +64,4 @@ To flash the program to the Pico:
 
 - The [rp-pico](https://github.com/rp-rs/rp-hal/tree/main/boards/rp-pico) crate
 - The [rp-hal](https://github.com/rp-rs/rp-hal) crate
-- The [bno055](https://github.com/eupn/bno055) crate
+- The [bno055](https://github.com/aunyks/bno055) crate
