@@ -2,8 +2,6 @@
 
 Have a [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/) get its realtime orientation data from a Bosch BNO055 [Inertial Measurement Unit](https://en.wikipedia.org/wiki/Inertial_measurement_unit) and write the to the host computer via serial USB connection.
 
-![Demo Video](https://raw.githubusercontent.com/aunyks/pico-bno055-rs/master/assets/pico-bno055-rs-demo.mp4)
-
 ## Get Started
 
 0. [Install the latest version of Rust](https://www.rust-lang.org/tools/install). This is the language in which this program is written
